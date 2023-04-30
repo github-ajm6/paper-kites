@@ -1,12 +1,14 @@
 #!/usr/bin/env bash
 #set -x
 # ---- |EXT ----
+NAME=${1:-dev}
 VARSET_EXT=$1
 # ---- |DEFAULT ----
-
+MODULE_DIR=modules/$NAME
 # ---- |OVERRIDE ----
 source .properd/VARSET
 test -n "$VARSET_EXT" && source $VARSET_EXT
 
 # ---- |MAIN ----
-terragrunt plan
+echo "Applying: $NAME"
+cd $MODULE_DIR  &&  terragrunt apply

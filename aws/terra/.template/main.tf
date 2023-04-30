@@ -20,9 +20,9 @@
 #}
 
 
-resource "null_resource" "nr" {
+resource "null_resource" "wid" {
   triggers = {
-    value = var.rid
+    value = var.wid
   }
 
   provisioner "local-exec" {
