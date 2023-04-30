@@ -1,11 +1,16 @@
 #!/usr/bin/env bash
 #set -x
 # ---- |EXT ----
-VARSET_EXT=$1
+NAME=${1:-dev}
+VARSET_EXT=$2
 # ---- |DEFAULT ----
-
+$ENVI_DIR=envi/$NAME
 # ---- |OVERRIDE ----
 source .properd/VARSET
 test -n "$VARSET_EXT" && source $VARSET_EXT
 
 # ---- |MAIN ----
+mkdir -p $ENVI_DIR
+cp .template/terragrunt.hcl  $ENVI_DIR/ 
+
+
