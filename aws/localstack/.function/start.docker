@@ -15,4 +15,9 @@ docker run   \
     -p 4566:4566 \
     -p 4510-4559:4510-4559 \
     -e LOCALSTACK_API_KEY=${LOCALSTACK_API_KEY:- } \
+    -e AWS_DEFAULT_REGION="us-east-1" \
+    -e AWS_REGION="us-east-1" \
+    -e AWS_SECRET_ACCESS_KEY="test" \
+    -e AWS_ACCESS_KEY_ID="test" \
+    -e HOSTNAME="localstack" \
     $DKR_IMAGE
