@@ -1,0 +1,3 @@
+
+DKR_IMAGE=localstack/localstack
+CONTAINER_NAME=localstack

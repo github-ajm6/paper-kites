@@ -5,9 +5,9 @@ CMD=$@
 #VARSET_EXT=$1
 # ---- |DEFAULT ----
 DKR_IMAGE=amazon/aws-cli
-ENDPOINT_URL=${ENDPOINT_URL:-http://172.17.0.1:4566}
-AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID:-foobar}
-AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY:-foobar}
+ENDPOINT_URL=${ENDPOINT_URL:-https://localhost.localstack.cloud:4566}
+AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID:-test}
+AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY:-test}
 # ---- |OVERRIDE ----
 source .properd/VARSET
 test -n "$VARSET_EXT" && source $VARSET_EXT
@@ -17,8 +17,8 @@ docker run \
     --rm \
     -it \
     --volume  ~/.aws:/root/.aws \
+    -e AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID \
+    -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY \
     amazon/aws-cli --endpoint-url=$ENDPOINT_URL  $CMD
     
-#    -e AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID \
-#   -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY \
 
