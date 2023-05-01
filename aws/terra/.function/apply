@@ -2,13 +2,15 @@
 #set -x
 # ---- |EXT ----
 NAME=${1:-dev}
-VARSET_EXT=$1
+VARSET_EXT=$2
 # ---- |DEFAULT ----
 MODULE_DIR=modules/$NAME
+DEBUG="--terragrunt-log-level debug --terragrunt-debug"
+
 # ---- |OVERRIDE ----
 source .properd/VARSET
 test -n "$VARSET_EXT" && source $VARSET_EXT
 
 # ---- |MAIN ----
 echo "Applying: $NAME"
-cd $MODULE_DIR  &&  terragrunt apply
+cd $MODULE_DIR  &&  terragrunt apply $DEBUG

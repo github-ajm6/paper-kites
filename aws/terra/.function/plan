@@ -2,7 +2,7 @@
 #set -x
 # ---- |EXT ----
 NAME=${1:-dev}
-VARSET_EXT=$1
+VARSET_EXT=$2
 # ---- |DEFAULT ----
 MODULE_DIR=modules/$NAME
 # ---- |OVERRIDE ----
