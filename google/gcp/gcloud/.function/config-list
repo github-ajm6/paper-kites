@@ -9,4 +9,4 @@ source .properd/VARSET
 test -n "$VARSET_EXT" && source $VARSET_EXT
 
 # ---- |MAIN ----
-gcloud config list  --format=json | jq
+gcloud config list  --format=json | jq --indent 4
