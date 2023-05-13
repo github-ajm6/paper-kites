@@ -1,0 +1,18 @@
+#!/bin/bash
+
+set -x
+ARTEFACT_DIR=${ARTEFACT_DIR:-artefacts}
+mkdir -p $ARTEFACT_DIR
+# ---- TF ----
+URL=https://releases.hashicorp.com/terraform/1.4.6/terraform_1.4.6_linux_amd64.zip
+ZIP=$(basename $URL)
+BIN_CLI=$ARTEFACT_DIR/${ZIP%.zip}
+curl -L  $URL | gunzip > $BIN_CLI && chmod 0755 $BIN_CLI
+ln -sf $(readlink -f $BIN_CLI) ~/.local/bin/terraform
+
+# ---- TG ----
+URL=https://github.com/gruntwork-io/terragrunt/releases/download/v0.45.6/terragrunt_linux_amd64
+VERSION=$(basename ${URL%/*})
+BIN_CLI=$ARTEFACT_DIR/$(basename $URL)_$VERSION
+curl -L -o $BIN_CLI  $URL && chmod 0755 $BIN_CLI
+ln -sf $(readlink -f $BIN_CLI) ~/.local/bin/terragrunt

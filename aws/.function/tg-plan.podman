@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+#set -x
+# ---- |EXT ----
+SUBDIR=$1
+VARSET_EXT=$2
+# ---- |DEFAULT ----
+SUBDIR=${SUBDIR:-null}
+DEBUG="--terragrunt-log-level debug --terragrunt-debug"
+DKR_IMAGE=alpine/terragrunt:1.4.6
+
+# ---- |OVERRIDE ----
+source .properd/VARSET
+test -n "$VARSET_EXT" && source $VARSET_EXT
+
+# ---- |MAIN ----
+docker run \
+    --rm \
+    -it \
+    --volume  $(pwd):/app:Z \
+    -e SUBDIR=$SUBDIR \
+    $DKR_IMAGE bash -c "cd /app && [[ $SUBDIR == "./" ]] && MODE=run-all
+                        cd $SUBDIR  &&  pwd && terragrunt $MODE plan $DEBUG  "
+

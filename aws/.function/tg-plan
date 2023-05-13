@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+#set -x
+# ---- |EXT ----
+SUBDIR=$1
+VARSET_EXT=$2
+# ---- |DEFAULT ----
+SUBDIR=${SUBDIR:-null}
+DEBUG="--terragrunt-log-level debug --terragrunt-debug"
+
+# ---- |OVERRIDE ----
+source .properd/VARSET
+test -n "$VARSET_EXT" && source $VARSET_EXT
+
+# ---- |MAIN ----
+[[ $SUBDIR == "./" ]] && MODE=run-all
+cd $SUBDIR  &&  pwd && terragrunt $MODE plan $DEBUG

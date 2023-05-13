@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+#set -x
+# ---- |EXT ----
+VARSET_EXT=$1
+# ---- |DEFAULT ----
+DKR_IMAGE=localstack/localstack
+DATUM_DIR=datum
+# ---- |OVERRIDE ----
+source .properd/VARSET
+test -n "$VARSET_EXT" && source $VARSET_EXT
+
+# ---- |MAIN ----
+DATU_DIR=$(readlink -f $DATUM_DIR)
+mkdir -p $DATUM_DIR
+docker run   \
+    --rm \
+    -it \
+    --name $CONTAINER_NAME \
+    -p 4566:4566 \
+    -p 4510-4559:4510-4559 \
+    -e DEBUG=1 \
+    -e AWS_DEFAULT_REGION="us-east-1" \
+    -e AWS_REGION="us-east-1" \
+    -e AWS_SECRET_ACCESS_KEY="test" \
+    -e AWS_ACCESS_KEY_ID="test" \
+    -e HOSTNAME="localstack" \
+    -e DATA_DIR=/datum \
+    --volume $DATUM_DIR:/datum \
+    $DKR_IMAGE

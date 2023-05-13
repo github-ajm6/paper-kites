@@ -1,0 +1,2 @@
+RID=$(openssl rand -hex 4)
+BACKEND_REGION=ap-southeast-1

@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+#set -x
+# ---- |EXT ----
+SUBDIR=${1}
+VARSET_EXT=$2
+# ---- |DEFAULT ----
+# ---- |OVERRIDE ----
+source .properd/VARSET
+test -n "$VARSET_EXT" && source $VARSET_EXT
+
+# ---- |MAIN ----
+test -z "$SUBDIR" && echo "SUBDIR!" && exit 1
+mkdir -p $SUBDIR
+cp .template/subdir/terragrunt.hcl  $SUBDIR
+cp .template/main.tf  $SUBDIR
+cp .template/vars.tf  $SUBDIR
+cp .template/outputs.tf  $SUBDIR
+cat .template/terraform.tfvars | WID=$(uuidgen) envsubst  > $SUBDIR/terraform.tfvars

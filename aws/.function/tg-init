@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+#set -x
+# ---- |EXT ----
+VARSET_EXT=$1
+# ---- |DEFAULT ----
+
+# ---- |OVERRIDE ----
+source .properd/VARSET
+test -n "$VARSET_EXT" && source $VARSET_EXT
+
+# ---- |MAIN ----
+#export $(<.properd/VARSET)
+export RID
+cat .template/terragrunt.hcl  | envsubst > terragrunt.hcl
+cat .template/subdir/terragrunt.hcl | envsubst > null/terragrunt.hcl
