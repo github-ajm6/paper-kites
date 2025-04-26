@@ -1,4 +1,4 @@
-name: Check Folder Sizes
+name: base
 
 on: [push, pull_request]
 
@@ -15,7 +15,7 @@ jobs:
           find . -maxdepth 1 -type d -not -name '.' -print0 | while IFS= read -r -d $'\0' folder; do
             du -sh "$folder" | awk '{print $1, $2}'
           done > folder_sizes.txt
-          echo "FOLDER_SIZES=$(cat folder_sizes.txt)" >> $GITHUB_OUTPUT
+          #echo "FOLDER_SIZES=$(cat folder_sizes.txt)" >> $GITHUB_OUTPUT
 
       - name: Output folder sizes
         run: echo "${{ steps.folder_sizes.outputs.FOLDER_SIZES }}"
