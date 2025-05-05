@@ -4,4 +4,4 @@
 
 ### Vector
 
-![](./Firefly-desktop-with-workstation-and-big-monitor-240470.svg)
+![](Firefly-desktop-with-workstation-and-big-monitor-240470.svg)
